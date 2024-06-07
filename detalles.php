@@ -1,21 +1,42 @@
 <?php
-
 require 'config/config.php';
 require 'config/database.php';
 
 $db = new Database();
 $conexion = $db->conectarDB();
 
-$query = "SELECT id, title, price FROM productos";
-$resultado = $conexion->query($query);
-// $productos = mysqli_fetch_assoc($resultado);
-// while($productos = mysqli_fetch_assoc($resultado)) {
-//     echo "<pre>";
-//     var_dump($productos);
-//     echo "</pre>";
-// }
-?>
+// TOMAR DATOS Y VERIDICAR QUE EXISTAN
+$id = isset($_GET['id']) ? $_GET['id'] : '';
+$id = filter_var($id, FILTER_VALIDATE_INT);
+$token = isset($_GET['token']) ? $_GET['token'] : '';
 
+
+// ENVIAR A PRODUCTOS
+if($id === '' || $token === '') {
+    header("Location: /index.php");
+} else {
+    $token_tmp = hash_hmac('sha1', $id, KEY_TOKEN);
+
+    if($token === $token_tmp) {
+        $query = "SELECT count(id) FROM productos WHERE id=" . $id;
+        $resultado = $conexion->query($query);
+        if($resultado->fetch_column() > 0) {
+            $query = "SELECT title, price, descripcion, discountPercentage  FROM productos WHERE id=" . $id . " LIMIT 1";
+            $resultado = $conexion->query($query);
+            $producto = mysqli_fetch_assoc($resultado);
+            $title = $producto['title'];
+            $price = $producto['price'];
+            $descripcion = $producto['descripcion'];
+            $discountPercentage = $producto['discountPercentage'];
+            $precio_desc = $precio - ($precio * $discountPercentage)/100;
+        }
+    }
+    else {
+        header("Location: /index.php");
+    }
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,29 +85,22 @@ $resultado = $conexion->query($query);
 
     <main>
         <div class="container contenedor">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <?php while($producto = mysqli_fetch_assoc($resultado)) : ?>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="/images/productos/1/1.png" alt="">
-                        <!--Colocar la imagen(IMPORTANTE PARA DESPUES)-->
-                        <div class="card-body">
-                            <h5 class="card-title"> <?php echo $producto['title'] ?> </h5>
-                            <p class="card-text">$ <?php echo number_format($producto['price'], 2, '.', ',') ?></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="detalles.php?id=<?php echo $producto['id']; ?>&token=<?php //cifrar informacion mediante contrasenia
-                                    echo hash_hmac('sha1', $producto['id'], KEY_TOKEN); ?>" class="btn btn-primary">Ver Más</a>
-                                </div>
-                                <small class="btn btn-success">Agregar</small>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-md-6 order-md-1">
+                    <img src="images/productos/1/1.png" alt="Imagen producto">
+                </div>
+                <div class="col-md-6 order-md-2">
+                    <h2><?php echo $title; ?></h2>
+                    <h3>$ <?php echo number_format($price, 2, '.', ','); ?></h3>
+                    <p><?php echo $descripcion; ?></p>
+
+                    <div class="d-grid gap-3 col-10 mx-auto">
+                        <buton class="btn btn-primary" type="button">Comprar</buton>
+                        <buton class="btn btn-outline-primary" type="button">Agregar al Carrito</buton>
                     </div>
                 </div>
-                <?php endwhile; ?>
-            </div>  
+            </div>
         </div>
-            
     </main>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

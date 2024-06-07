@@ -1,7 +1,24 @@
+/* GLOBALES */
+img,
+picture {
+    width: 100%;
+    display: block;
+}
+
+
+@media (max-width: 480px) {
+    .contenedor {
+        width: 90%;
+        margin: 0 auto;
+    }   
+}
+
 body {
     background-color: aliceblue;
 }
 
-.productos {
+
+/* PAGINA PRODUCTOS */
+main .container {
     padding: 30px 0;
 }
