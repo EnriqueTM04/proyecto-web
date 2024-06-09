@@ -29,7 +29,7 @@ if($id === '' || $token === '') {
             $descripcion = $producto['descripcion'];
             $discountPercentage = $producto['discountPercentage'];
             $precio_desc = $price - (($price * $discountPercentage)/100);
-            $dir_images = 'images/productos/' . '1' . '/';
+            $dir_images = 'src/images/productos/' . '1' . '/';
 
             $rutaImg = $dir_images . '1.png';
 
@@ -41,7 +41,7 @@ if($id === '' || $token === '') {
             $dir = dir($dir_images);
 
             while(($archivo = $dir->read())!= false) {
-                if($archivo != 'principal.png' && (strpos($archivo, 'png') || strpos($archivo, 'jpg'))) {
+                if($archivo != '1.png' && (strpos($archivo, 'png') || strpos($archivo, 'jpg'))) {
                     $imagenes[] = $dir_images . $archivo;
                 }
             }
@@ -62,8 +62,11 @@ if($id === '' || $token === '') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Web</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="src/css/styles.css" rel="stylesheet">
 </head>
 <body>
 
@@ -81,15 +84,15 @@ if($id === '' || $token === '') {
                 <!--mb-2 mb-lg-0-->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">Productos</a>
+                            <a href="#" class="nav-link active navegacion-responsive">Productos</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Catalogo</a>
+                            <a href="#" class="nav-link navegacion-responsive">Catalogo</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Contacto</a>
+                            <a href="#" class="nav-link navegacion-responsive">Contacto</a>
                         </li>
                     </ul>
 
@@ -149,5 +152,6 @@ if($id === '' || $token === '') {
     </main>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="src/js/script.js"></script>
 </body>
 </html>

@@ -15,6 +15,12 @@ picture {
 
 body {
     background-color: aliceblue;
+    font-family: "Mulish", sans-serif;
+}
+
+/* ENCABEZADO1 */
+.navegacion-responsive {
+    text-align: center;
 }
 
 
