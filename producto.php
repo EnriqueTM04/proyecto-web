@@ -1,5 +1,5 @@
 <?php
-require 'config/config.php';
+require 'includes/templates/header.php';
 require 'config/database.php';
 
 $db = new Database();
@@ -53,10 +53,6 @@ if($id === '' || $token === '') {
     }
 }
 
-?>
-
-<?php
-    require 'includes/templates/header.php';
 ?>
 
     <main>

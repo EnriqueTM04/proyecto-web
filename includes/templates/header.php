@@ -45,7 +45,7 @@ require 'config/config.php';
                         </li>
                     </ul>
 
-                    <a href="carrito.php" class="btn btn-primary">Carrito <span id="num_cart" class="badge bg-info-subtle"><?php echo $num_cart; ?></span></a>
+                    <a href="cart.php" class="btn btn-primary">Carrito <span id="num_cart" class="badge bg-info-subtle"><?php echo $num_cart; ?></span></a>
                 </div>
 
             </div>

@@ -8,7 +8,7 @@ picture {
 
 @media (max-width: 480px) {
     .container {
-        width: 90%;
+        max-width: 90%;
         margin: 0 auto;
     }   
 }
@@ -48,3 +48,5 @@ main .container {
 .detalles h2 {
 padding-top: 10px;
 }
+
+/* PAGINA CARRITO */

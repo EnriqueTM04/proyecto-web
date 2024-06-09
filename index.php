@@ -1,6 +1,6 @@
 <?php
 
-require 'config/config.php';
+require 'includes/templates/header.php';
 require 'config/database.php';
 
 $db = new Database();
@@ -17,13 +17,6 @@ $resultado = $conexion->query($query);
 
 // BORRAR CARRITO MOMENTANEAMENTE
 session_destroy();
-
-?>
-
-
-<?php
-
-require 'includes/templates/header.php';
 
 ?>
 
