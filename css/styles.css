@@ -7,7 +7,7 @@ picture {
 
 
 @media (max-width: 480px) {
-    .contenedor {
+    .container {
         width: 90%;
         margin: 0 auto;
     }   
@@ -21,4 +21,20 @@ body {
 /* PAGINA PRODUCTOS */
 main .container {
     padding: 30px 0;
+}
+
+/* PAGINA DETALLES */
+.precio-original {
+    margin-bottom: 0;
+}
+
+.detalles {
+    background-color: rgb(235, 241, 247);
+    border-radius: 0.5rem;
+    padding: 10px;
+    padding-bottom: 15px;
+}
+
+.detalles h2 {
+padding-top: 10px;
 }

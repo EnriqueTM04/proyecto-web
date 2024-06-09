@@ -28,7 +28,24 @@ if($id === '' || $token === '') {
             $price = $producto['price'];
             $descripcion = $producto['descripcion'];
             $discountPercentage = $producto['discountPercentage'];
-            $precio_desc = $precio - ($precio * $discountPercentage)/100;
+            $precio_desc = $price - (($price * $discountPercentage)/100);
+            $dir_images = 'images/productos/' . '1' . '/';
+
+            $rutaImg = $dir_images . '1.png';
+
+            if(!file_exists($rutaImg)) {
+                $rutaImg = '';
+            }
+
+            $imagenes = array();
+            $dir = dir($dir_images);
+
+            while(($archivo = $dir->read())!= false) {
+                if($archivo != 'principal.png' && (strpos($archivo, 'png') || strpos($archivo, 'jpg'))) {
+                    $imagenes[] = $dir_images . $archivo;
+                }
+            }
+            $dir->close();
         }
     }
     else {
@@ -84,19 +101,47 @@ if($id === '' || $token === '') {
     </header>
 
     <main>
-        <div class="container contenedor">
+        <div class="container">
             <div class="row">
                 <div class="col-md-6 order-md-1">
-                    <img src="images/productos/1/1.png" alt="Imagen producto">
+                    <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="<?php echo $rutaImg ?>" alt="Imagen producto" class="d-block w-100">
+                            </div>
+                            <?php foreach($imagenes as $img) : ?>
+                            <div class="carousel-item">
+                            <img src="<?php echo $img ?>" alt="Imagen producto" class="d-block w-100">
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="col-md-6 order-md-2">
-                    <h2><?php echo $title; ?></h2>
-                    <h3>$ <?php echo number_format($price, 2, '.', ','); ?></h3>
+                <div class="col-md-6 order-md-2 detalles">
+                    <h2 class="text-center"><?php echo $title; ?></h2>
+                    <?php if($discountPercentage> 0) { ?>
+                        <p class="bg-success text-bg-secondary badge">OFERTA ESPECIAL</p>
+                        <p class="precio-original"> $<del><?php echo number_format($price, 2, '.', ','); ?></del> </p>
+                        <h3 class="fw-semibold">
+                            $ <?php echo number_format($precio_desc, 2, '.', ','); ?>
+                            <small class="text-success fw-normal"> -%<?php echo $discountPercentage; ?></small>
+                        </h3>
+                    <?php } else { ?>
+                        <h3> $ <?php echo number_format($price, 2, '.', ','); ?></h3>
+                    <?php } ?>
                     <p><?php echo $descripcion; ?></p>
 
                     <div class="d-grid gap-3 col-10 mx-auto">
                         <buton class="btn btn-primary" type="button">Comprar</buton>
-                        <buton class="btn btn-outline-primary" type="button">Agregar al Carrito</buton>
+                        <buton class="btn btn-outline-primary" type="button" onclick="addProducto(<?php echo $id; ?>, '<?php echo $token_tmp; ?>')">Agregar al Carrito</buton>
                     </div>
                 </div>
             </div>

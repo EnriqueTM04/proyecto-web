@@ -68,17 +68,25 @@ $resultado = $conexion->query($query);
                 <?php while($producto = mysqli_fetch_assoc($resultado)) : ?>
                 <div class="col">
                     <div class="card shadow-sm">
-                        <img src="/images/productos/1/1.png" alt="">
+                        <img src="/images/productos/1/1.png" alt="Imagen producto" class="d-block w-100">
                         <!--Colocar la imagen(IMPORTANTE PARA DESPUES)-->
                         <div class="card-body">
                             <h5 class="card-title"> <?php echo $producto['title'] ?> </h5>
                             <p class="card-text">$ <?php echo number_format($producto['price'], 2, '.', ',') ?></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="detalles.php?id=<?php echo $producto['id']; ?>&token=<?php //cifrar informacion mediante contrasenia
+                                    <a href="producto.php?id=<?php echo $producto['id']; ?>&token=<?php //cifrar informacion mediante contrasenia
                                     echo hash_hmac('sha1', $producto['id'], KEY_TOKEN); ?>" class="btn btn-primary">Ver Más</a>
                                 </div>
-                                <small class="btn btn-success">Agregar</small>
+                                <small class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-plus" width="36" height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                    <path d="M12.5 17h-6.5v-14h-2" />
+                                    <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5" />
+                                    <path d="M16 19h6" />
+                                    <path d="M19 16v6" />
+                                    </svg>
+                                </small>
                             </div>
                         </div>
                     </div>
