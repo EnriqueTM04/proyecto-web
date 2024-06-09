@@ -29,6 +29,10 @@ main .container {
     padding: 30px 0;
 }
 
+.btn-outline-info:hover .icono-carrito {
+    stroke: white;
+}
+
 /* PAGINA DETALLES */
 .precio-original {
     margin-bottom: 0;

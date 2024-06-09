@@ -18,6 +18,13 @@ function addProducto(id, token) {
     fetch(url, {
         method: 'POST',
         body: formData,
-        mode: 'cros'
-    }).then(response=> response.json())
+        mode: 'cors'
+    })
+        .then(response=> response.json())
+        .then(data => {
+            if(data.ok) {
+                const elemento = document.getElementById("num_cart");
+                elemento.innerHTML = data.numero;
+            }
+        })
 }
