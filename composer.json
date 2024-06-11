@@ -1,0 +1,19 @@
+{
+    "name": "enriq/proyecto-web",
+    "description": "Proyecto de pagina web",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Enriq\\ProyectoWeb\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "EnriqueTM04",
+            "email": "enriquetabo03@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}

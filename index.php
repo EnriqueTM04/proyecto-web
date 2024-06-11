@@ -26,7 +26,7 @@ session_destroy();
                 <?php while($producto = mysqli_fetch_assoc($resultado)) : ?>
                 <div class="col">
                     <div class="card shadow-sm">
-                        <img src="src/images/productos/1/1.png" alt="Imagen producto" class="d-block w-100">
+                        <img src="src/images/productos/1/1.png" alt="Imagen producto" class="d-block w-100" loading="lazy">
                         <!--Colocar la imagen(IMPORTANTE PARA DESPUES)-->
                         <div class="card-body">
                             <h5 class="card-title"> <?php echo $producto['title'] ?> </h5>

@@ -96,7 +96,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 <?php } ?>
 
-            <form class="row g-3" action="register.php" method="POST">
+            <form class="row g-3" action="register.php" method="POST" id="formulario_registro">
             <div class="col-md-6">
                 <label for="nombres" class="form-label">Nombre(s)</label>
                 <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Tus Nombres">
@@ -108,6 +108,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-md-6">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="ej: you@example.com">
+                <span id="validaEmail" class="text-warning"></span>
             </div>
             <div class="col-md-3">
                 <label for="tel" class="form-label">Teléfono</label>
