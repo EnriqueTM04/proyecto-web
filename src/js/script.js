@@ -5,7 +5,33 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function eventListeners() {
+    // FORMULARIO REGISTRO
+    const txtUsuario = document.getElementById('usuario');
+    txtUsuario.addEventListener("blur", () => {
+        existeUsuario(txtUsuario.value);
+    }, false)
+}
 
+//VERIFICAR SI EXISTE YA EL USUARIO
+function existeUsuario(usuario) {
+    const url = "../../classes/clienteAx.php";
+    const formData = new FormData();
+    formData.append("accion", "existeUsuario");
+    formData.append("usuario", usuario);
+
+    fetch(url, {
+        method: 'POST',
+        body: formData      
+    })
+        .then(response => response.json())
+        .then(data => {
+            if(data.ok) {
+                document.getElementById('usuario').value = '';
+                document.getElementById('validaUsuario').innerHTML = 'Usuario ya existente';
+            } else {
+                document.getElementById('validaUsuario').innerHTML = '';
+            }
+        })
 }
 
 // AGREGAR AL CARRITO
@@ -82,3 +108,4 @@ function eliminarProducto(id) {
             }
         })
 }
+
