@@ -1,5 +1,5 @@
 <?php
-
+//Comentario de prueba
 require 'includes/templates/header.php';
 require 'config/database.php';
 
