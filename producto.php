@@ -12,7 +12,7 @@ $token = isset($_GET['token']) ? $_GET['token'] : '';
 
 
 // ENVIAR A PRODUCTOS
-if($id === '' || $token === '') {
+if($id === '' || $token === '' || !$id) {
     header("Location: /index.php");
 } else {
     $token_tmp = hash_hmac('sha1', $id, KEY_TOKEN);
