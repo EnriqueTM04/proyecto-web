@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal</title>
+    <script src="./jquery/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="./Bootstrap/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <script src="./Bootstrap/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="productosProyecto.js"></script>
+    <script src="principal.js"></script>
+</head>
+<body>
+    <header>
+        <img src="Banner completo.png" class="img-fluid" alt="">
+        <!-- Menu de Navegación -->
+        <nav class="navbar bg-dark navbar-dark fixed-top" aria-label="First navbar example">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">ZAMAZOR</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbars" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon text-white"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbars">
+                    <ul class="navbar-nav me-auto mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Submenú</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form role="search">
+                    <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar">
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!-- Menu de Navegación -->
+    </header>
+    <main>
+    <div class="container">
+        <!-- Carrusel -->
+        <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./ejemplo2.webp" class="img-fluid">
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h1>Oferta 1</h1>
+                            <p class="opacity-75">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga vel magni esse distinctio exercitationem tempore temporibus! Vel quis nisi delectus.</p>
+                            <p><a class="btn btn-lg btn-secondary" href="#">Sign up today</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./ejemplo2.webp" class="img-fluid">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Oferta 2</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates fuga nobis, odio vero deserunt quas? Recusandae soluta asperiores quasi aspernatur.</p>
+                            <p><a class="btn btn-lg btn-secondary" href="#">Learn more</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./ejemplo2.webp" class="img-fluid">
+                    <div class="container">
+                        <div class="carousel-caption text-end">
+                            <h1>Oferta 3</h1>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque ipsum nihil impedit, necessitatibus laudantium dolorum nobis perspiciatis quis delectus maxime.</p>
+                            <p><a class="btn btn-lg btn-secondary" href="#">Browse gallery</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- Carrusel -->
+    </div>
+    <div id="verProductos" class="container"></div>
+    <div class="container">
+        <h1>¿Que ofrecemos?</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>A cerca de nosotros...</h1>
+        <h2>Lorem, ipsum.</h2>
+        <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, adipisci? Consequuntur inventore officiis ullam? Sunt, accusamus distinctio? Quam velit amet consequatur facere sint ipsa iusto eveniet perspiciatis error excepturi, placeat reiciendis animi, beatae numquam eius, consectetur nihil quod eos corrupti. At sequi facere obcaecati sunt neque nostrum suscipit illo tempora rerum repellat unde harum, maiores aperiam culpa, sapiente natus. Voluptas maxime nesciunt fuga adipisci, odio sed dolorem sit harum doloremque fugiat, quaerat officia sequi eveniet, ipsam ipsa doloribus incidunt minima consectetur iure commodi illo. Deserunt nisi corrupti molestias dolorem, voluptates cum suscipit, praesentium accusamus eligendi commodi quia, officia alias dignissimos.</p>
+        <h2>Lorem, ipsum.</h2>
+        <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo id soluta at minima. Fugit repudiandae sit sequi odit. Accusamus, assumenda.</p>
+        <h2>Lorem, ipsum.</h2>
+        <p class="text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur culpa, impedit vero quibusdam, ad tempore fuga, rerum deleniti nihil sed provident incidunt non corporis hic nemo? Repellendus iste, perspiciatis vero nesciunt recusandae laudantium et aliquid!</p>
+        <h2>Lorem, ipsum.</h2>
+        <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dolor voluptate ut nam, pariatur soluta aliquid excepturi nulla reiciendis eos molestiae impedit architecto vero adipisci, expedita beatae veniam nisi libero sit consequatur deleniti veritatis. Soluta saepe, architecto quas vero totam repudiandae dolorem, minus, dolorum corporis illo id consequuntur facere a harum unde dolores et neque deleniti provident ex fugit nobis!</p>
+    </div>
+    <div class="container">
+
+    </div>
+    <footer>
+        <p class="text-center">&copy; Aqui poner el footer</p>
+    </footer>
+    </main>
+</body>
+</html>
