@@ -29,6 +29,13 @@ main .container {
     padding: 30px 0;
 }
 
+.card-img-top {
+    width: auto; /* Establecer el ancho automático */
+    height: 250px; /* Establecer la altura */
+    object-fit: cover; /* Ajustar la imagen manteniendo la relación de aspecto, cubriendo el contenedor */
+}
+
+
 .btn-outline-info:hover .icono-carrito {
     stroke: white;
 }
@@ -75,3 +82,5 @@ padding-top: 10px;
     padding: 10px;
     margin-top: 10px;
 }
+
+/* LOGIN */

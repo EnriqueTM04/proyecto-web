@@ -58,13 +58,46 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resultado = $conexion->query($query);
 
         if($resultado) {
-            // registrar Usuario
+            
             $id = $conexion->insert_id;
-            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
             $token = generarToken();
+
+            require 'classes/Mailer.php';
+            $mailer = new Mailer();
+
+            // registrar Usuario
+            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
             $query = "INSERT INTO usuarios (usuario, password, token, id_cliente) VALUES ('$usuario', '$passwordHash', '$token', '$id')";
             $resultado = $conexion->query($query);
-            if(!$resultado) {
+            $idUsuario = $conexion->insert_id;
+            if($idUsuario > 0) {
+
+                $url = SITE_URL . '/activar_cliente.php?id=' . $idUsuario . '&token=' . $token;
+
+                $asunto = 'Activar Cuenta Zamazor';
+                $cuerpo = "
+                <html>
+                    <head>
+                        <title>Activa tu cuenta</title>
+                    </head>
+                    <body>
+                        <h1>Bienvenido a Nuestro Sitio</h1>
+                        <p>Hola $nombres, Gracias por registrarte. Por favor, haz clic en el enlace de abajo para activar tu cuenta:</p>
+                        <p><a href= '$url'>Activa tu cuenta</a></p>
+                        <p>Si el enlace no funciona, copia y pega la siguiente URL en tu navegador:</p>
+                        <p>'$url'</p>
+                        <br>
+                        <p>Saludos,<br>El equipo de Nuestro Sitio</p>
+                    </body>
+                </html>
+                ";
+                
+                if($mailer->enviarEmail($email, $asunto, $cuerpo)) {
+                    echo "Para terminar el proceso sigue las instrucciones enviadas a tu correo $email";
+                    exit;
+                }
+            }
+            else {
                 $errores[] = "Error al registrar usuario";
             }
         } else {
@@ -128,8 +161,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" class="form-control" id="password" name="password">
             </div>
             <div class="col-md-6">
-                <label for="password2" class="form-label">Repita la Contraseña</label>
-                <input type="password" class="form-control" id="password2" name="password2">
+                    <label for="password2" class="form-label">Repita la Contraseña</label>
+                    <input type="password" class="form-control" id="password2" name="password2">
             </div>
             <div class="col-12">
                 <div class="form-check">

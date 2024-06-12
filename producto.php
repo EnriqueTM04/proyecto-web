@@ -21,31 +21,42 @@ if($id === '' || $token === '' || !$id) {
         $query = "SELECT count(id) FROM productos WHERE id=" . $id;
         $resultado = $conexion->query($query);
         if($resultado->fetch_column() > 0) {
-            $query = "SELECT title, price, descripcion, discountPercentage  FROM productos WHERE id=" . $id . " LIMIT 1";
+            $query = "SELECT title, price, descripcion, discountPercentage, thumbnail  FROM productos WHERE id=" . $id . " LIMIT 1";
             $resultado = $conexion->query($query);
             $producto = mysqli_fetch_assoc($resultado);
             $title = $producto['title'];
             $price = $producto['price'];
             $descripcion = $producto['descripcion'];
             $discountPercentage = $producto['discountPercentage'];
+            $thumbnail = $producto['thumbnail'];
             $precio_desc = $price - (($price * $discountPercentage)/100);
             $dir_images = 'src/images/productos/' . '1' . '/';
-
-            $rutaImg = $dir_images . '1.png';
-
-            if(!file_exists($rutaImg)) {
-                $rutaImg = '';
+            
+            if($resultado) {
+                $query = "SELECT url FROM imagenes WHERE producto_id = $id";
+                $resultado = $conexion->query($query);
+                // $imagenes = mysqli_fetch_all($resultado);       
+                // echo "<pre>";
+                // var_dump($imagenes);
+                // echo "</pre>";       
+                // exit;  
             }
 
-            $imagenes = array();
-            $dir = dir($dir_images);
+            // $rutaImg = $dir_images . '1.png';
 
-            while(($archivo = $dir->read())!= false) {
-                if($archivo != '1.png' && (strpos($archivo, 'png') || strpos($archivo, 'jpg'))) {
-                    $imagenes[] = $dir_images . $archivo;
-                }
-            }
-            $dir->close();
+            // if(!file_exists($rutaImg)) {
+            //     $rutaImg = '';
+            // }
+
+            // $imagenes = array();
+            // $dir = dir($dir_images);
+
+            // while(($archivo = $dir->read())!= false) {
+            //     if($archivo != '1.png' && (strpos($archivo, 'png') || strpos($archivo, 'jpg'))) {
+            //         $imagenes[] = $dir_images . $archivo;
+            //     }
+            // }
+            // $dir->close();
         }
     }
     else {
@@ -62,13 +73,13 @@ if($id === '' || $token === '' || !$id) {
                     <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="<?php echo $rutaImg ?>" alt="Imagen producto" class="d-block w-100">
+                                <img src="<?php echo $thumbnail ?>" alt="Imagen producto" class="d-block w-100" loading="lazy">
                             </div>
-                            <?php foreach($imagenes as $img) : ?>
+                            <?php while($imagenes = mysqli_fetch_assoc($resultado)) : ?>
                             <div class="carousel-item">
-                            <img src="<?php echo $img ?>" alt="Imagen producto" class="d-block w-100">
+                            <img src="<?php echo $imagenes['url'] ?>" alt="Imagen producto" class="d-block w-100">
                             </div>
-                            <?php endforeach; ?>
+                            <?php endwhile; ?>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

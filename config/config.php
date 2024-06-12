@@ -1,5 +1,8 @@
 <?php 
 
+// CONFIGURAICIONES
+define("SITE_URL", "http://localhost:3000");
+
 define("KEY_TOKEN", "ADEIDH739432");
 
 session_start();
