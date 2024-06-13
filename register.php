@@ -114,55 +114,57 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
-
-    <main>
-        <div class="container contenedor">
-            <h2 class="text-center text-primary">Registrarse</h2>
-                <?php if(!empty($errores)) { ?>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <ul>
-                            <?php foreach($errores as $error) : ?>
-                                <li><?php echo $error; ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php } ?>
-
-            <form class="row g-3" action="register.php" method="POST" id="formulario_registro">
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registrarse</h3>
+            <?php if(!empty($errores)) { ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <ul>
+                        <?php foreach($errores as $error) : ?>
+                            <li><?php echo $error; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php } ?>
+            <form class="row g-3" action="register.php" method="POST" id="formulario_registro" autocomplete="off">
             <div class="col-md-6">
                 <label for="nombres" class="form-label">Nombre(s)</label>
-                <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Tus Nombres">
+                <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Tus Nombres" required>
             </div>
             <div class="col-md-6">
                 <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ambos Apellidos">
+                <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ambos Apellidos" required>
             </div>
             <div class="col-md-6">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="ej: you@example.com">
+                <input type="email" class="form-control" id="email" name="email" placeholder="ej: you@example.com" required>
                 <span id="validaEmail" class="text-warning"></span>
             </div>
             <div class="col-md-3">
                 <label for="tel" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" id="tel" name="tel" placeholder="Número principal">
+                <input type="tel" class="form-control" id="tel" name="tel" placeholder="Tel principal" required>
             </div>
             <div class="col-md-3">
                 <label for="usuario" class="form-label">Usuario</label>
-                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="elija un nombre de usuario">
+                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usename" required>
                 <span id="validaUsuario" class="text-warning"></span>
             </div>
             <div class="col-12">
                 <label for="direccion" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Av. example No.1">
+                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Av. example No.1" required>
             </div>
             <div class="col-md-6">
                 <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <div class="col-md-6">
                     <label for="password2" class="form-label">Repita la Contraseña</label>
-                    <input type="password" class="form-control" id="password2" name="password2">
+                    <input type="password" class="form-control" id="password2" name="password2" required>
             </div>
             <div class="col-12">
                 <div class="form-check">
@@ -176,11 +178,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn btn-primary">Crear Cuenta</button>
             </div>
             </form>
-
-            <br><br><br><br><br><br><br>
+          </div>
         </div>
-    </main>
-
+      </div>
+    </div>
+  </div>
+</section>
 
 <?php
 

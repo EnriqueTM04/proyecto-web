@@ -16,7 +16,7 @@ $resultado = $conexion->query($query);
 // }
 
 // BORRAR CARRITO MOMENTANEAMENTE
-session_destroy();
+// session_destroy();
 
 ?>
 

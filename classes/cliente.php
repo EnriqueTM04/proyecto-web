@@ -59,4 +59,42 @@ function activarUsuario($id, $conexion) {
     return $resultado;
 }
 
+function login($usuario, $password, $conexion) {
+    $query = "SELECT id, password, usuario FROM usuarios WHERE usuario LIKE '$usuario' LIMIT 1";
+    $resultado = $conexion->query($query);
+
+    if($resultado) {
+        if(esActivo($usuario, $conexion)) {
+            $row = mysqli_fetch_assoc($resultado);
+        
+            if(password_verify($password, $row['password'])) {
+                $_SESSION['login'] = true;
+                $_SESSION['user_id'] = $row['id'];
+                $_SESSION['user_name'] = $row['usuario'];
+                header('Location: index.php');
+                exit;
+            }
+        }
+        else {
+            return 'El usuario no esta activado';
+        }
+    } 
+
+    return 'El usuario y/o contraseña son incorrectos';
+}
+
+function esActivo($usuario, $conexion): bool {
+    $query = "SELECT activacion FROM usuarios WHERE usuario LIKE '$usuario' LIMIT 1";
+    $resultado = $conexion->query($query);
+    $row = mysqli_fetch_assoc($resultado);
+    if($row['activacion'] == 1) {
+        return true;
+    }
+
+    else {
+        return false;
+    }
+
+}
+
 ?>

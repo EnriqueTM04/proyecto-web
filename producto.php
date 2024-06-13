@@ -114,6 +114,8 @@ if($id === '' || $token === '' || !$id) {
         </div>
     </main>
     
+    <br><br><br><br><br><br><br><br><br><br><br>
+
 <?php
 
 require 'includes/templates/footer.php';
