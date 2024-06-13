@@ -6,7 +6,7 @@ require 'config/database.php';
 $db = new Database();
 $conexion = $db->conectarDB();
 
-$query = "SELECT id, title, price, thumbnail FROM productos";
+$query = "SELECT id, title, price, descripcion, discountPercentage, thumbnail FROM productos";
 $resultado = $conexion->query($query);
 // $productos = mysqli_fetch_assoc($resultado);
 // while($productos = mysqli_fetch_assoc($resultado)) {
@@ -29,8 +29,14 @@ $resultado = $conexion->query($query);
                     <img src="<?php echo $producto['thumbnail']; ?>" height="250px" alt="Imagen producto" class="card-img-top" loading="lazy">
                     <!--Colocar la imagen(IMPORTANTE PARA DESPUES)-->
                     <div class="card-body">
-                        <h5 class="card-title"> <?php echo $producto['title'] ?> </h5>
-                        <p class="card-text">$ <?php echo number_format($producto['price'], 2, '.', ',') ?></p>
+                        <h4 class="card-title"> <?php echo $producto['title'] ?> </h4>
+                        <p class="card-text"><del><?php echo $price = $producto['price']; ?></del></p>
+                        <h5 class="card-text">$ <?php
+                            $price = $producto['price'];
+                            $discountPercentage =  $producto['discountPercentage'];
+                            $precio_desc = $price - (($price * $discountPercentage)/100);
+                            echo number_format($precio_desc, 2, '.', ','); 
+                        ?><small class="text-success fst-italic modal-sm"> %<?php echo $discountPercentage; ?> OFF</small></h5>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a href="producto.php?id=<?php echo $producto['id']; ?>&token=<?php //cifrar informacion mediante contrasenia

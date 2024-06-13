@@ -21,7 +21,7 @@ if($id === '' || $token === '' || !$id) {
         $query = "SELECT count(id) FROM productos WHERE id=" . $id;
         $resultado = $conexion->query($query);
         if($resultado->fetch_column() > 0) {
-            $query = "SELECT title, price, descripcion, discountPercentage, thumbnail  FROM productos WHERE id=" . $id . " LIMIT 1";
+            $query = "SELECT title, price, descripcion, discountPercentage, thumbnail, stock, rating  FROM productos WHERE id=" . $id . " LIMIT 1";
             $resultado = $conexion->query($query);
             $producto = mysqli_fetch_assoc($resultado);
             $title = $producto['title'];
@@ -29,6 +29,8 @@ if($id === '' || $token === '' || !$id) {
             $descripcion = $producto['descripcion'];
             $discountPercentage = $producto['discountPercentage'];
             $thumbnail = $producto['thumbnail'];
+            $stock = $producto['stock'];
+            $rating = $producto['rating'];
             $precio_desc = $price - (($price * $discountPercentage)/100);
             $dir_images = 'src/images/productos/' . '1' . '/';
             
@@ -105,8 +107,13 @@ if($id === '' || $token === '' || !$id) {
                     <?php } ?>
                     <p><?php echo $descripcion; ?></p>
 
+                    <p>Quedan <span class="fw-bold"><?php echo $stock; ?></span> disponibles</p>
+
+                    <p>Rating: <?php echo $rating; ?></p><br><br>
+                    <hr><br><br>
+
                     <div class="d-grid gap-3 col-10 mx-auto">
-                        <buton class="btn btn-primary" type="button">Comprar</buton>
+                        <a class="btn btn-primary" type="button" href="cart.php" onclick="addProducto(<?php echo $id; ?>, '<?php echo $token_tmp; ?>')">Comprar</a>
                         <buton class="btn btn-outline-primary" type="button" onclick="addProducto(<?php echo $id; ?>, '<?php echo $token_tmp; ?>')">Agregar al Carrito</buton>
                     </div>
                 </div>

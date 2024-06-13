@@ -57,7 +57,16 @@ $auth = $_SESSION['login'] ?? false;
                     </svg> <span id="num_cart" class="badge bg-info-subtle"><?php if($num_cart > 0) echo $num_cart; ?></span></a>
 
                     <?php if($auth) : ?>
-                            <a class="btn btn-outline-light me-2" href="cerrar-sesion.php">Cerrar Sesión</a>
+                        <div class="dropdown">
+                        <button id="btn_session" class="btn btn-outline-light me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Mi Cuenta
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btn_session">
+                            <li><a class="dropdown-item" href="cerrar-sesion.php">Cerrar Sesión</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                        </div>
                     <?php endif; ?>
                     <?php if(!$auth) : ?>
                             <a class="btn btn-outline-light me-2" href="login.php">Iniciar Sesión</a>

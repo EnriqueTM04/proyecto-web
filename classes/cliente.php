@@ -53,7 +53,7 @@ function validaToken($id, $token, $conexion): string {
 }
 
 function activarUsuario($id, $conexion) {
-    $query = "UPDATE usuarios SET activacion = 1, token = '' WHERE id = $id";
+    $query = "UPDATE usuarios SET activacion = 1, monedero = 10000.00, token = '' WHERE id = $id";
     $resultado = $conexion->query($query);
     
     return $resultado;

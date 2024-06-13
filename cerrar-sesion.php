@@ -2,7 +2,8 @@
 
     session_start();
     $_SESSION = [];
+    session_destroy();
     var_dump($_SESSION);
-    header('Location: /');
+    header('Location: index.php');
 
 ?>

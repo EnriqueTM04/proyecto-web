@@ -106,7 +106,34 @@ if($productos != null) {
         </div>
         <div class="row">
             <div class="col d-flex justify-content-end">
-                <button class="btn btn-primary btn-lg">Proceder al pago</button>
+                <?php if($auth) { ?>
+                <a class="btn btn-primary btn-lg" href="pago.php">Proceder al pago</a>
+                <?php } else { ?>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Proceder al pago
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">No has iniciado sesión</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        <div class="modal-body">
+                            <p>Para disfrutar de todas las ventajas y poder adquirir nuestros productos, por favor crea una cuenta con nosotros. ¡Estamos emocionados de tenerte como parte de nuestra comunidad!</p>
+                            <p>Si ya estas registrado inicia sesión</p>
+                        </div>
+                            <div class="modal-footer">
+                                <a type="button" class="btn btn-info" href="register.php">Crear Cuenta</a>
+                                <a type="button" class="btn btn-primary" href="login.php">Iniciar Sesión</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
             </div>
         </div>
     </div>

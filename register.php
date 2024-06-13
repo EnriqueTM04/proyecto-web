@@ -105,7 +105,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if(empty($errores)) {
-            // REDIRIGIR POSTERIORMENTE AL USUARIO
+            // /REDIRIGIR POSTERIORMENTE AL USUARIO
         }
     }
     
