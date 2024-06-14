@@ -5,9 +5,6 @@ require 'config/database.php';
 $db = new Database();
 $conexion = $db->conectarDB();
 
-$query = "SELECT id, title, price FROM productos";
-$resultado = $conexion->query($query);
-
 $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
 
 $lista_carrito = [];
@@ -107,7 +104,29 @@ if($productos != null) {
         <div class="row">
             <div class="col d-flex justify-content-end">
                 <?php if($auth) { ?>
-                <a class="btn btn-primary btn-lg" href="pago.php">Proceder al pago</a>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Confirmar compra
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Proceder al pago?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Es todo lo que desea comprar o quiere agregar más productos?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aguregar más</button>
+                            <a type="button" class="btn btn-primary" href="pago.php">COMPRAR</a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
                 <?php } else { ?>
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
