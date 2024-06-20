@@ -7,8 +7,13 @@ $db = new Database();
 $conexion = $db->conectarDB();
 
 $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
-$usuario = $_SESSION['user_id'];
+$id_usuario = $_SESSION['user_id'];
 
+$query = "SELECT monedero FROM usuarios WHERE id='$id_usuario'";
+$resultado = $conexion->query($query);
+$monedero = $resultado->fetch_assoc()['monedero'];
+
+$total = 0;
 $lista_carrito = [];
 
 if($productos != null) {
@@ -18,17 +23,37 @@ if($productos != null) {
 
         $resultado = $conexion->query($query);
 
-        $lista_carrito[] = $resultado->fetch_assoc();;
+        $lista_carrito[] = $resultado->fetch_assoc();
     }
-    // echo "<pre>";
-    // var_dump($lista_carrito);
-    // echo "</pre>";
 }
 
-echo "<pre>";
-var_dump($lista_carrito);
-echo "</pre>";
+foreach($lista_carrito as $producto) {
+    $_id = $producto['id'];
+    $price = $producto['price'];
+    $cantidad = $producto['cantidad'];
+    $discountPercentage = $producto['discountPercentage'];
+    $stock = $producto['stock'];
+    $precio_desc = $price - (($price * $discountPercentage)/100);
+    $subtotal = $cantidad * $precio_desc;
+    $total += $subtotal; 
+}
 
-var_dump($usuario);
+// echo "<pre>";
+// var_dump($lista_carrito);
+// echo "</pre>";
+
+// var_dump(number_format($total, 2));
+
+
+if($monedero >= $total) {
+    unset($_SESSION['carrito']);
+    header('Location: /cart.php?result=1');
+    exit;
+}
+
+else {
+    header('Location: /cart.php?result=0');
+    exit;
+}
 
 ?>

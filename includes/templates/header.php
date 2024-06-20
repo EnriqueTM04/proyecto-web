@@ -15,7 +15,7 @@ $auth = $_SESSION['login'] ?? false;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Web</title>
+    <title>ZAMAZOR</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +43,7 @@ $auth = $_SESSION['login'] ?? false;
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link navegacion-responsive">Catalogo</a>
+                            <a href="#" class="nav-link navegacion-responsive">Nosotros</a>
                         </li>
 
                         <li class="nav-item">
@@ -63,8 +63,8 @@ $auth = $_SESSION['login'] ?? false;
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="btn_session">
                             <li><a class="dropdown-item" href="cerrar-sesion.php">Cerrar Sesión</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Historial compras</a></li>
+                            <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
                         </ul>
                         </div>
                     <?php endif; ?>
