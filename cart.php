@@ -5,6 +5,8 @@ require 'config/database.php';
 $db = new Database();
 $conexion = $db->conectarDB();
 
+$result = $_GET['result'] ?? null;
+
 $productos = isset($_SESSION['carrito']['productos']) ? $_SESSION['carrito']['productos'] : null;
 
 $lista_carrito = [];
@@ -23,10 +25,20 @@ if($productos != null) {
     // echo "</pre>";
 }
 
+
 ?>
 
 <main>
     <div class="container">
+        <?php if($result !== null && intval($result) === 0) { ?>
+            <div class="alert alert-warning" role="alert">
+                No tienes el dinero suficiente para realizar la compra
+            </div>
+        <?php } else if($result !== null && intval($result) === 1) { ?>
+            <div class="alert alert-success" role="alert">
+                !Compra realizada exitosamente¡
+            </div>
+        <?php } ?>
         <div class="table-responsive">
             <table class="table table-hover table-borderless">
                 <thead>
