@@ -2,6 +2,7 @@
 
 require 'config/config.php';
 require 'config/database.php';
+require 'includes/funciones.php';
 
 $db = new Database();
 $conexion = $db->conectarDB();
@@ -46,6 +47,24 @@ foreach($lista_carrito as $producto) {
 
 
 if($monedero >= $total) {
+
+    // REDUCIR EL MONEDERO
+    $monedero -= $total;
+
+    // CAMBIAR DATOS PRODUCTOS
+    $stock -= $cantidad;
+
+    // ESTABLECER COMPRA
+    $id_transaccion = 0;
+    $fecha_compra = 0;
+
+    $query = "INSERT INTO compras id_transaccion, fecha_compra, email, id_cliente, total VALUES ($id_transaccion, $fecha_compra, $email, $id_cliente, $total)";
+
+
+    debuguear($query);
+    exit;
+    $resultado = $conexion->query($query);
+
     unset($_SESSION['carrito']);
     header('Location: /cart.php?result=1');
     exit;

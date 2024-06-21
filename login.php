@@ -4,7 +4,7 @@ require 'includes/templates/header.php';
 require 'config/database.php';
 require 'classes/cliente.php';
 
-if($_SESSION['login']) {
+if(isset($_SESSION['login'])) {
   header('Location: index.php');
 }
 
