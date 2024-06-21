@@ -17,6 +17,7 @@ function validacionRegistro() {
     const txtNombres = document.getElementById('nombres');
     const txtApellidos = document.getElementById('apellidos');
     const txtDireccion = document.getElementById('direccion');
+    const txtTelefono = document.getElementById('tel');
 
     txtNombres.focus();
 
@@ -63,12 +64,24 @@ function validacionRegistro() {
     }, false);
     txtDireccion.addEventListener("blur", () => {
         if(txtDireccion.value.trim().length < 1) {
-            txtDireccion.setCustomValidity('El nombre es requerido.');
+            txtDireccion.setCustomValidity('La direccion es requerida.');
         }
         else {
             txtDireccion.setCustomValidity('');
         }
         txtDireccion.reportValidity();
+    }, false);
+    txtTelefono.addEventListener("blur", () => {
+        const numero = txtTelefono.value;
+        const telRegex = /^\d{10}$/;
+        if (!telRegex.test(numero)) {
+            telError.style.display = 'inline';
+            telInput.setCustomValidity('Telefono de 10 digitos.');
+        } else {
+            telError.style.display = 'none';
+            telInput.setCustomValidity('');
+        }
+        txtTelefono.reportValidity();
     }, false);
 
     form.addEventListener('submit', (event) => {
