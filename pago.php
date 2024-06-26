@@ -56,7 +56,7 @@ if($monedero >= $total) {
 
     // ESTABLECER COMPRA
     $id_transaccion = 0;
-    $fecha_compra = 0;
+    $fecha_compra = date('Y-m-d');
 
     $query = "INSERT INTO compras id_transaccion, fecha_compra, email, id_cliente, total VALUES ($id_transaccion, $fecha_compra, $email, $id_cliente, $total)";
 

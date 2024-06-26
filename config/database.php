@@ -4,7 +4,7 @@ class Database {
     private $host = "localhost";
     private $database = "tienda_web";
     private $username = "root";
-    private $password = "";
+    private $password = "root";
 
     function conectarDB() {
 

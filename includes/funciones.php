@@ -7,4 +7,8 @@ function debuguear($variable) {
     exit;
 }
 
+function incluirfooter( ) {
+    require __DIR__ . '/templates/footer.php';
+}
+
 ?>
