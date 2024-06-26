@@ -11,8 +11,8 @@ if ($conn->connect_error) {
 }
 
 // Top 5 productos más vendidos
-$sql_productos = "SELECT nombre, SUM(cantidad) as total_vendidos FROM detalles_compras 
-                  GROUP BY id_producto 
+$sql_productos = "SELECT title, SUM(vendidos) as total_vendidos FROM productos
+                  GROUP BY id
                   ORDER BY total_vendidos DESC 
                   LIMIT 5";
 $result_productos = $conn->query($sql_productos);
@@ -22,7 +22,7 @@ $vendidos = [];
 
 if ($result_productos->num_rows > 0) {
     while ($row = $result_productos->fetch_assoc()) {
-        $productos[] = $row['nombre'];
+        $productos[] = $row['title'];
         $vendidos[] = $row['total_vendidos'];
     }
 }
