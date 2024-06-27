@@ -22,7 +22,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if(!$errores) {
-    $errores[] = login($usuario, $password, $conexion);
+    if(!loginAdmin($usuario, $password, $conexion)) {
+      $errores[] = login($usuario, $password, $conexion);
+    }
   }
 }
 

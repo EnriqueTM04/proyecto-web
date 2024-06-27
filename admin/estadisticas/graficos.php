@@ -2,6 +2,16 @@
 
 require '../../config/database.php';
 
+if(!isset($_SESSION)) {
+    session_start();
+}
+
+$auth = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : false;
+
+if($auth !== 'admin') {
+    header('Location: ../index.php');
+}
+
 $db = new Database();
 $conexion = $db->conectarDB();
 
