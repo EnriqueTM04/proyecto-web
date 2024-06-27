@@ -59,7 +59,25 @@ function activarUsuario($id, $conexion) {
     return $resultado;
 }
 
-function login($usuario, $password, $conexion) {
+function loginAdmin($usuario, $password, $conexion): bool {
+    $query = "SELECT id, password, usuario FROM usuarios WHERE usuario LIKE 'admin' LIMIT 1";
+    $resultado = $conexion->query($query);
+
+    if($resultado) {
+        $row = mysqli_fetch_assoc($resultado);
+    
+        if(password_verify($password, $row['password'])) {
+            $_SESSION['login'] = true;
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['user_name'] = 'admin';
+            header('Location: /admin/index.php');
+            exit;
+        }
+    }
+    return false;
+}
+
+function login($usuario, $password, $conexion): string {
     $query = "SELECT id, password, usuario FROM usuarios WHERE usuario LIKE '$usuario' LIMIT 1";
     $resultado = $conexion->query($query);
 

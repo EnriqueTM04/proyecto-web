@@ -2,13 +2,16 @@
 
     require '../../config/config.php';
     require '../../config/database.php';
-    session_start();
-
-    // $auth = $_SESSION['login'];
-
-    // if(!$auth) {
-    //     header("Location: ../../index.php");
-    // }
+    
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+    
+    $auth = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : false;
+    
+    if($auth !== 'admin') {
+        header('Location: ../index.php');
+    }
 
     $db = new Database();
     $conexion = $db->conectarDB();

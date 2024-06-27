@@ -6,7 +6,11 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
-$auth = $_SESSION['login'] ?? false;
+$auth = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : false;
+
+if($auth === 'admin') {
+    header('Location: admin/index.php');
+}
 
 ?>
 

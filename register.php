@@ -96,10 +96,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </html>
                 ";
                 
-                if($mailer->enviarEmail($email, $asunto, $cuerpo)) {
-                    echo "Para terminar el proceso sigue las instrucciones enviadas a tu correo $email";
-                    exit;
-                }
+                if($mailer->enviarEmail($email, $asunto, $cuerpo)) { ?>
+                <br><br><br>
+                <div class="alert alert-info container" role="alert">
+                    Para terminar el proceso sigue las instrucciones enviadas a tu correo <?php echo " $email";
+                    exit; ?>
+                </div>
+                <?php } 
             }
             else {
                 $errores[] = "Error al registrar usuario";

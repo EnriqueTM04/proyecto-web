@@ -15,8 +15,20 @@ if($id === '' || $token==='') {
 $db = new Database();
 $conexion = $db->conectarDB();
 
-echo validaToken($id, $token, $conexion);
+$mensaje = validaToken($id, $token, $conexion);
 
+?>
 
+<br><br><br><br>
+
+<main>
+    <div class="alert alert-success container" role="alert">
+    <?php echo $mensaje ?> -- <a href="login.php">Inicia sesion</a>
+    </div>
+</main>
+
+<?php
+
+require 'includes/templates/footer.php';
 
 ?>
