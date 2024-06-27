@@ -78,8 +78,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="btn_session">
                         <li><a class="dropdown-item" href="../cerrar-sesion.php">Cerrar Sesión</a></li>
-                        <li><a class="dropdown-item" href="productos/crear.php">Agregar Producto</a></li>
-                        <li><a class="dropdown-item" href="estadisticas/graficos.php">Estadisticas</a></li>
+                        <li><a class="dropdown-item" href="/admin/productos/crear.php">Agregar Producto</a></li>
+                        <li><a class="dropdown-item" href="/admin/estadisticas/graficos.php">Estadisticas</a></li>
                     </ul>
                 </div>
 
@@ -88,7 +88,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
     
     <main class="container mt-4">
-        <h1>Administrador de ZAMAZOR</h1>
+        <h1 class="text-white text-center">Administrador de ZAMAZOR</h1>
         <?php if( intval($resultado) === 1) : ?>
             <div class="alert alert-success" role="alert">Producto creado correctamente</div>
         <?php elseif( intval($resultado) === 2) : ?>
@@ -97,7 +97,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="alert alert-success" role="alert">Producto eliminado correctamente</div>
         <?php endif; ?>
 
-        <a href="productos/crear.php" class="btn btn-success mb-3">Nueva Propiedad</a>
+        <a href="/admin/productos/crear.php" class="btn btn-success mb-3">Nuevo Producto</a>
 
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
@@ -122,7 +122,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <input type="hidden" name="id" value="<?php echo $producto['id'] ?>">
                                 <button type="submit" class="btn btn-danger">Eliminar</button>
                             </form>
-                            <a href="admin/productos/modificar.php?id=<?php echo $producto['id'] ?>" class="btn btn-warning">Actualizar</a>
+                            <a href="/admin/productos/modificar.php?id=<?php echo $producto['id'] ?>" class="btn btn-warning">Actualizar</a>
                         </td>
                     </tr>
                     <?php endwhile; ?>
