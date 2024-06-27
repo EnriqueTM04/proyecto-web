@@ -23,9 +23,8 @@ if ($result_productos->num_rows > 0) {
 }
 
 // Top 5 categorías más vendidas
-$sql_categorias = "SELECT category, SUM(dc.cantidad) as total_vendidos 
+$sql_categorias = "SELECT category, SUM(p.vendidos) as total_vendidos 
                    FROM productos p 
-                   JOIN detalles_compras dc ON p.id = dc.id_producto 
                    GROUP BY category 
                    ORDER BY total_vendidos DESC 
                    LIMIT 5";
@@ -65,6 +64,20 @@ if ($result_usuarios->num_rows > 0) {
     while ($row = $result_usuarios->fetch_assoc()) {
         $fechas[] = $row['fecha_ingreso'];
         $usuarios_creados[] = $row['usuarios_creados'];
+    }
+}
+
+// Stock total de productos
+$sql_stock = "SELECT title, stock FROM productos";
+$result_stock = $conexion->query($sql_stock);
+
+$titles_stock = [];
+$stock = [];
+
+if ($result_stock->num_rows > 0) {
+    while ($row = $result_stock->fetch_assoc()) {
+        $titles_stock[] = $row['title'];
+        $stock[] = $row['stock'];
     }
 }
 
@@ -136,6 +149,13 @@ $conexion->close();
                 <canvas id="usuariosCreadosChart" width="600" height="300"></canvas>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h2>Stock Total de Productos</h2>
+                <canvas id="stockProductosChart" width="600" height="300"></canvas>
+            </div>
+        </div>
     </main>
 
     <script>
@@ -193,6 +213,28 @@ $conexion->close();
                     data: <?php echo json_encode($usuarios_creados); ?>,
                     backgroundColor: 'rgba(153, 102, 255, 0.2)',
                     borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var ctxStock = document.getElementById('stockProductosChart').getContext('2d');
+        var stockProductosChart = new Chart(ctxStock, {
+            type: 'bar',
+            data: {
+                labels: <?php echo json_encode($titles_stock); ?>,
+                datasets: [{
+                    label: 'Stock de productos',
+                    data: <?php echo json_encode($stock); ?>,
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
                     borderWidth: 1
                 }]
             },
