@@ -23,8 +23,8 @@ if ($result_productos->num_rows > 0) {
 }
 
 // Top 5 categorías más vendidas
-$sql_categorias = "SELECT category, SUM(p.vendidos) as total_vendidos 
-                   FROM productos p 
+$sql_categorias = "SELECT category, SUM(vendidos) as total_vendidos 
+                   FROM productos 
                    GROUP BY category 
                    ORDER BY total_vendidos DESC 
                    LIMIT 5";
@@ -67,17 +67,21 @@ if ($result_usuarios->num_rows > 0) {
     }
 }
 
-// Stock total de productos
+// Stock de productos
 $sql_stock = "SELECT title, stock FROM productos";
 $result_stock = $conexion->query($sql_stock);
 
-$titles_stock = [];
+$productos_stock = [];
 $stock = [];
+$productos_sin_stock = [];
 
 if ($result_stock->num_rows > 0) {
     while ($row = $result_stock->fetch_assoc()) {
-        $titles_stock[] = $row['title'];
+        $productos_stock[] = $row['title'];
         $stock[] = $row['stock'];
+        if ($row['stock'] == 0) {
+            $productos_sin_stock[] = $row['title'];
+        }
     }
 }
 
@@ -92,68 +96,91 @@ $conexion->close();
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
-    <header data-bs-theme="dark">
-        <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a href="/admin/index.php" class="navbar-brand">
-                    <strong>ZAMAZOR</strong>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/admin/index.php"><strong>ZAMAZOR</strong></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>  
-
-                <div class="collapse navbar-collapse" id="navbarHeader">
-                <!--mb-2 mb-lg-0-->
-                    <ul class="navbar-nav me-auto">
-                    </ul>
-                    <div class="dropdown">
-                    <button id="btn_session" class="btn btn-outline-light me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        MODO ADMINISTRACION
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="btn_session">
-                        <li><a class="dropdown-item" href="../cerrar-sesion.php">Cerrar Sesión</a></li>
-                        <li><a class="dropdown-item" href="productos/crear.php">Agregar Producto</a></li>
-                        <li><a class="dropdown-item" href="estadisticas/graficos.php">Estadisticas</a></li>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                MODO ADMINISTRACION
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
+                                <li><a class="dropdown-item" href="../cerrar-sesion.php">Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" href="productos/crear.php">Agregar Producto</a></li>
+                                <li><a class="dropdown-item" href="estadisticas/graficos.php">Estadísticas</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
-
             </div>
-        </div>
+        </nav>
     </header>
 
-    <main class="container">
-        <h1 class="text-center my-4">Admin Dashboard</h1>
+    <main class="container my-4">
+        <h1 class="text-center mb-4">Admin Dashboard</h1>
 
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Top 5 Productos Más Vendidos</h2>
-                <canvas id="productosVendidosChart" width="300" height="300"></canvas>
+        <div class="row mb-4">
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Top 5 Productos Más Vendidos</h2>
+                        <canvas id="productosVendidosChart"></canvas>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                <h2>Top 5 Categorías Más Vendidas</h2>
-                <canvas id="categoriasVendidasChart" width="300" height="300"></canvas>
-            </div>
-        </div>
-
-        <div class="row my-4">
-            <div class="col-12">
-                <h2>Total de Ganancias</h2>
-                <p>Total Ganancias: $<?php echo number_format($total_ganancias, 2); ?></p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <h2>Usuarios Creados por Día</h2>
-                <canvas id="usuariosCreadosChart" width="600" height="300"></canvas>
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Top 5 Categorías Más Vendidas</h2>
+                        <canvas id="categoriasVendidasChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-12">
-                <h2>Stock Total de Productos</h2>
-                <canvas id="stockProductosChart" width="600" height="300"></canvas>
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Total de Ganancias</h2>
+                        <p>Total Ganancias: $<?php echo number_format($total_ganancias, 2); ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Usuarios Creados por Día</h2>
+                        <canvas id="usuariosCreadosChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Stock Total de Productos</h2>
+                        <canvas id="stockProductosChart"></canvas>
+                        <?php if (!empty($productos_sin_stock)): ?>
+                            <h3 class="mt-4">Productos sin Stock:</h3>
+                            <ul>
+                                <?php foreach ($productos_sin_stock as $producto): ?>
+                                    <li><?php echo $producto; ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -229,12 +256,12 @@ $conexion->close();
         var stockProductosChart = new Chart(ctxStock, {
             type: 'bar',
             data: {
-                labels: <?php echo json_encode($titles_stock); ?>,
+                labels: <?php echo json_encode($productos_stock); ?>,
                 datasets: [{
                     label: 'Stock de productos',
                     data: <?php echo json_encode($stock); ?>,
-                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                    borderColor: 'rgba(255, 159, 64, 1)',
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
                     borderWidth: 1
                 }]
             },
