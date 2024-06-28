@@ -13,9 +13,7 @@ if ($conn->connect_error) {
 
 // Consulta para obtener los productos
 $sql = "SELECT * FROM productos ORDER BY RAND() LIMIT 3";
-
 $result = $conn->query($sql);
-
 // Inicio del documento HTML/PHP
 ?>
 <!DOCTYPE html>
@@ -66,32 +64,32 @@ $result = $conn->query($sql);
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="./CARPETA PRUEBAS/ejemplo2.webp" class="img-fluid">
-                    <div class="container">
-                        <div class="carousel-caption text-start">
-                            <h1>Oferta 1</h1>
-                            <p class="opacity-75">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga vel magni esse distinctio exercitationem tempore temporibus! Vel quis nisi delectus.</p>
-                            <p><a class="btn btn-lg btn-secondary" href="#">Sign up today</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="./CARPETA PRUEBAS/ejemplo2.webp" class="img-fluid">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Oferta 2</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates fuga nobis, odio vero deserunt quas? Recusandae soluta asperiores quasi aspernatur.</p>
-                            <p><a class="btn btn-lg btn-secondary" href="#">Learn more</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="./CARPETA PRUEBAS/ejemplo2.webp" class="img-fluid">
+                    <img src="https://cdn.dummyjson.com/products/images/groceries/Ice%20Cream/thumbnail.png" class="img-fluid" width="500" height="auto">
                     <div class="container">
                         <div class="carousel-caption text-end">
-                            <h1>Oferta 3</h1>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque ipsum nihil impedit, necessitatibus laudantium dolorum nobis perspiciatis quis delectus maxime.</p>
-                            <p><a class="btn btn-lg btn-secondary" href="#">Browse gallery</a></p>
+                            <h1 style="color: black; font-size: 100px;">ZAMAZOR</h1>
+                            <p style="color: black;" class="opacity-75">Tu opcion confiable para comprar en linea.</p>
+                            <p style="color: black;"><a class="btn btn-lg btn-secondary" href="register.php">Registrate</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://cdn.dummyjson.com/products/images/kitchen-accessories/Black%20Aluminium%20Cup/thumbnail.png" class="img-fluid" width="500" height="auto">
+                    <div class="container">
+                        <div class="carousel-caption text-end">
+                            <h1 style="color: black;">Tenemos las mejores ofertas</h1>
+                            <p style="color: black;">Dejate llevar por las ofertas que nuestra pagina te<br> ofrece, sorprendete con la gran cantidad de descuentos disponibles para ti.</p>
+                            <p style="color: black;"><a class="btn btn-lg btn-secondary" href="login.php">Inicia sesion</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/thumbnail.png" class="img-fluid" width="500" height="auto">
+                    <div class="container">
+                        <div class="carousel-caption text-end">
+                            <h1 style="color: black;">Aprovecha la oportunidad</h1>
+                            <p style="color: black;">Solo por esta vez regalaremos $10,000 al registrarte<br> para que comiences a comprar desde ahora tus productos favoritos.</p>
+                            <p style="color: black;"><a class="btn btn-lg btn-secondary" href="register.php">Registrate ahora</a></p>
                         </div>
                     </div>
                 </div>
