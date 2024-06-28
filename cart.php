@@ -133,8 +133,8 @@ if($productos != null) {
                             ¿Es todo lo que desea comprar o quiere agregar más productos?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aguregar más</button>
-                            <a type="button" class="btn btn-primary" href="pago.php">COMPRAR</a>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Agregar más</button>
+                            <a type="button" class="btn btn-primary" href="pago.php?total=<?php echo $total; ?>">COMPRAR</a>
                         </div>
                         </div>
                     </div>

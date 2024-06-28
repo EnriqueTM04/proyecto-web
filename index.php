@@ -1,8 +1,21 @@
 <?php
+
+require 'config/config.php';
+
+if(!isset($_SESSION)) {
+    session_start();
+}
+
+$auth = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : false;
+
+if($auth === 'admin') {
+    header('Location: admin/index.php');
+}
+
 // Conexión a la base de datos
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
 $dbname = "tienda_web";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -30,30 +43,67 @@ $result = $conn->query($sql);
     <script src="principal.js"></script>
 </head>
 <body>
-    <header>
-        <img src="Banner completo.png" class="img-fluid" alt="">
-        <!-- Menu de Navegación -->
-        <nav class="navbar bg-dark navbar-dark fixed-top" aria-label="First navbar example">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">ZAMAZOR</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbars" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon text-white"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbars">
-                    <ul class="navbar-nav me-auto mb-2">
+<header data-bs-theme="dark">
+        <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a href="index.php" class="navbar-brand">
+                    <strong>ZAMAZOR</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>  
+
+                <div class="collapse navbar-collapse" id="navbarHeader">
+                <!--mb-2 mb-lg-0-->
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="productos.php">Productos</a>
+                            <a href="productos.php" class="nav-link active navegacion-responsive">Productos</a>
                         </li>
                     </ul>
+
+                    <a href="cart.php" class="btn btn-primary me-2"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-filled" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M6 2a1 1 0 0 1 .993 .883l.007 .117v1.068l13.071 .935a1 1 0 0 1 .929 1.024l-.01 .114l-1 7a1 1 0 0 1 -.877 .853l-.113 .006h-12v2h10a3 3 0 1 1 -2.995 3.176l-.005 -.176l.005 -.176c.017 -.288 .074 -.564 .166 -.824h-5.342a3 3 0 1 1 -5.824 1.176l-.005 -.176l.005 -.176a3.002 3.002 0 0 1 1.995 -2.654v-12.17h-1a1 1 0 0 1 -.993 -.883l-.007 -.117a1 1 0 0 1 .883 -.993l.117 -.007h2zm0 16a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm11 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" stroke-width="0" fill="currentColor" />
+                    </svg> <span id="num_cart" class="badge bg-info-subtle"><?php if($num_cart > 0) echo $num_cart; ?></span></a>
+
+                    <?php if($auth) : ?>
+                        <div class="dropdown">
+                        <button id="btn_session" class="btn btn-outline-light me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Mi Cuenta
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btn_session">
+                            <li><a class="dropdown-item" href="cerrar-sesion.php">Cerrar Sesión</a></li>
+                            <li><a class="dropdown-item" href="#">Historial compras</a></li>
+                            <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                        </ul>
+                        </div>
+                    <?php endif; ?>
+                    <?php if(!$auth) : ?>
+                            <a class="btn btn-outline-light me-2" href="login.php">Iniciar Sesión</a>
+                    <?php endif; ?>
                 </div>
+
             </div>
-        </nav>
-        <!-- Menu de Navegación -->
+        </div>
     </header>
-    <main>
+    <main class="background-radial-gradient principal">
+    <style>
+        .background-radial-gradient {
+        background-color: hsl(218, 41%, 15%);
+        background-image: radial-gradient(650px circle at 0% 0%,
+            hsl(218, 41%, 35%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%),
+            radial-gradient(1250px circle at 100% 100%,
+            hsl(218, 41%, 45%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%);
+        }
+    </style>
     <div class="container">
         <!-- Carrusel -->
         <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
@@ -67,9 +117,9 @@ $result = $conn->query($sql);
                     <img src="https://cdn.dummyjson.com/products/images/groceries/Ice%20Cream/thumbnail.png" class="img-fluid" width="500" height="auto">
                     <div class="container">
                         <div class="carousel-caption text-end">
-                            <h1 style="color: black; font-size: 100px;">ZAMAZOR</h1>
-                            <p style="color: black;" class="opacity-75">Tu opcion confiable para comprar en linea.</p>
-                            <p style="color: black;"><a class="btn btn-lg btn-secondary" href="register.php">Registrate</a></p>
+                            <h1 style="color: black; font-size: 100px;" class="text-white">ZAMAZOR</h1>
+                            <p style="color: black;" class="opacity-75 text-white">Tu opcion confiable para comprar en linea.</p>
+                            <p style="color: black;"><a class="btn btn-lg btn-secondary text-white" href="register.php">Registrate</a></p>
                         </div>
                     </div>
                 </div>
@@ -77,9 +127,9 @@ $result = $conn->query($sql);
                     <img src="https://cdn.dummyjson.com/products/images/kitchen-accessories/Black%20Aluminium%20Cup/thumbnail.png" class="img-fluid" width="500" height="auto">
                     <div class="container">
                         <div class="carousel-caption text-end">
-                            <h1 style="color: black;">Tenemos las mejores ofertas</h1>
-                            <p style="color: black;">Dejate llevar por las ofertas que nuestra pagina te<br> ofrece, sorprendete con la gran cantidad de descuentos disponibles para ti.</p>
-                            <p style="color: black;"><a class="btn btn-lg btn-secondary" href="login.php">Inicia sesion</a></p>
+                            <h1 style="color: black;" class="text-white">Tenemos las mejores ofertas</h1>
+                            <p style="color: black;" class="text-white">Dejate llevar por las ofertas que nuestra pagina te<br> ofrece, sorprendete con la gran cantidad de descuentos disponibles para ti.</p>
+                            <p style="color: black;"><a class="btn btn-lg btn-secondary text-white" href="login.php">Inicia sesion</a></p>
                         </div>
                     </div>
                 </div>
@@ -87,9 +137,9 @@ $result = $conn->query($sql);
                     <img src="https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/thumbnail.png" class="img-fluid" width="500" height="auto">
                     <div class="container">
                         <div class="carousel-caption text-end">
-                            <h1 style="color: black;">Aprovecha la oportunidad</h1>
-                            <p style="color: black;">Solo por esta vez regalaremos $10,000 al registrarte<br> para que comiences a comprar desde ahora tus productos favoritos.</p>
-                            <p style="color: black;"><a class="btn btn-lg btn-secondary" href="register.php">Registrate ahora</a></p>
+                            <h1 style="color: black;" class="text-white">Aprovecha la oportunidad</h1>
+                            <p style="color: black;" class="text-white">Solo por esta vez regalaremos $10,000 al registrarte<br> para que comiences a comprar desde ahora tus productos favoritos.</p>
+                            <p style="color: black;"><a class="btn btn-lg btn-secondary text-white" href="register.php">Registrate ahora</a></p>
                         </div>
                     </div>
                 </div>
@@ -106,14 +156,14 @@ $result = $conn->query($sql);
         <!-- Carrusel -->
     </div>
     <div id="verProductos" class="container">
-        <h1>Podria interesarte...</h1>
+        <h1 class="text-white">Podria interesarte...</h1>
         <div class="row">
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
         ?>
             <div class="col-sm-12 col-md-4 col-lg-4">
-              <div class="card text-center" style="">
+              <div class="card text-center">
                 <img src="<?php echo $row['thumbnail']; ?>" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title"><?php echo $row['title']; ?></h5>
@@ -131,7 +181,7 @@ $result = $conn->query($sql);
         </div>
     </div>
     <div class="container">
-        <h1>¿Qué ofrecemos?</h1>
+        <h1 class="text-white">¿Qué ofrecemos?</h1>
         <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4">
                 <div class="card">
@@ -170,6 +220,7 @@ $result = $conn->query($sql);
             </div>
         </div>
     </div>
+    <br><br><br><br>
     </main>
     <footer class="py-3 bg-dark">
     <div class="container">

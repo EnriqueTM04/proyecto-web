@@ -120,9 +120,9 @@ $conexion->close();
                                 MODO ADMINISTRACION
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
-                                <li><a class="dropdown-item" href="../cerrar-sesion.php">Cerrar Sesión</a></li>
-                                <li><a class="dropdown-item" href="productos/crear.php">Agregar Producto</a></li>
-                                <li><a class="dropdown-item" href="estadisticas/graficos.php">Estadísticas</a></li>
+                                <li><a class="dropdown-item" href="cerrar-sesion.php">Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" href="/admin/productos/crear.php">Agregar Producto</a></li>
+                                <li><a class="dropdown-item" href="/admin/estadisticas/graficos.php">Estadísticas</a></li>
                             </ul>
                         </li>
                     </ul>

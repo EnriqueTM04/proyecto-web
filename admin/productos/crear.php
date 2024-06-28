@@ -146,8 +146,10 @@
                         <button id="btn_session" class="btn btn-outline-light me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             MODO ADMINISTRACION
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="btn_session">
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
                             <li><a class="dropdown-item" href="cerrar-sesion.php">Cerrar Sesión</a></li>
+                            <li><a class="dropdown-item" href="/admin/productos/crear.php">Agregar Producto</a></li>
+                            <li><a class="dropdown-item" href="/admin/estadisticas/graficos.php">Estadísticas</a></li>
                         </ul>
                     </div>
                 </div>

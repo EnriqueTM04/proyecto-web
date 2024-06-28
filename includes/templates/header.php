@@ -43,15 +43,7 @@ if($auth === 'admin') {
                 <!--mb-2 mb-lg-0-->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active navegacion-responsive">Productos</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link navegacion-responsive">Nosotros</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link navegacion-responsive">Contacto</a>
+                            <a href="productos.php" class="nav-link active navegacion-responsive">Productos</a>
                         </li>
                     </ul>
 

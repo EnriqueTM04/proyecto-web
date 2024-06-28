@@ -34,6 +34,7 @@
     $title = $producto['title'] ?? '';
     $descripcion = $producto['descripcion'] ?? '';
     $price = $producto['price'] ?? '';
+    $stock = $producto['stock'] ?? '';
     $category = $producto['category'] ?? '';
     $discountPercentage = $producto['discountPercentage'] ?? '';
     $brand = $producto['brand'] ?? '';
@@ -45,6 +46,7 @@
         //en caso de que coloquen codigo sql, pueda hacer inyeccion sql, deshabilitarlo y guardarlo como entidad
         $title = mysqli_real_escape_string( $conexion, $_POST['title'] );
         $price = mysqli_real_escape_string( $conexion, $_POST['price'] );
+        $stock = mysqli_real_escape_string( $conexion, $_POST['stock'] );
         $descripcion  = mysqli_real_escape_string( $conexion, $_POST['descripcion'] );
         $category  = mysqli_real_escape_string( $conexion, $_POST['category'] );
         $discountPercentage = mysqli_real_escape_string( $conexion, $_POST['discountPercentage'] );
@@ -60,6 +62,10 @@
 
         if(!$price) {
             $errores[] = "Debes agregar un precio";
+        }
+
+        if(!$stock) {
+            $errores[] = "Debes agregar un numero de disponibilidad";
         }
 
         if(!$descripcion) {
@@ -158,8 +164,10 @@
                         <button id="btn_session" class="btn btn-outline-light me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             MODO ADMINISTRACION
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="btn_session">
-                            <li><a class="dropdown-item" href="../../cerrar-sesion.php">Cerrar Sesión</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
+                            <li><a class="dropdown-item" href="cerrar-sesion.php">Cerrar Sesión</a></li>
+                            <li><a class="dropdown-item" href="/admin/productos/crear.php">Agregar Producto</a></li>
+                            <li><a class="dropdown-item" href="/admin/estadisticas/graficos.php">Estadísticas</a></li>
                         </ul>
                     </div>
                 </div>
